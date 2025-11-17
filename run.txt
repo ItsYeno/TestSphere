@@ -1,0 +1,43 @@
+# Install all dependencies
+npm run install:all
+
+# Initialize the database
+cd backend
+npm run database:init
+
+# Start the backend server (in one terminal)
+npm run dev:backend
+
+# Start the frontend (in another terminal)  
+npm run dev:frontend
+
+curl -X POST http://localhost:5000/api/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"admin@mtn.com","password":"admin123"}'
+
+
+  # Install all dependencies
+npm run install:all
+
+# Initialize database (if not done already)
+npm run database:init
+
+# Start both backend and frontend
+npm run dev
+
+Access the application:
+
+Frontend: http://localhost:3000
+
+Backend API: http://localhost:5000/api
+
+Default Login Credentials
+Admin: admin@mtn.com / admin123
+
+Mobile Tester: mobile.tester@mtn.com / tester123
+
+Web Tester: web.tester@mtn.com / tester123
+
+API Tester: api.tester@mtn.com / tester123
+
+Documentation

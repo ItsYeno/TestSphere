@@ -1,0 +1,24 @@
+{
+  "name": "testsphere-cli",
+  "version": "1.0.0",
+  "description": "TestSphere CLI tool for uploading test results",
+  "main": "cli.js",
+  "bin": {
+    "testsphere": "./cli.js"
+  },
+  "scripts": {
+    "start": "node cli.js",
+    "build": "echo 'CLI tool ready'"
+  },
+  "dependencies": {
+    "commander": "^9.4.1",
+    "axios": "^1.4.0",
+    "inquirer": "^8.2.5",
+    "chalk": "^4.1.2",
+    "figlet": "^1.5.2",
+    "form-data": "^4.0.0",
+    "fs-extra": "^11.1.1",
+    "glob": "^10.2.2",
+    "xml2js": "^0.6.2"
+  }
+}
