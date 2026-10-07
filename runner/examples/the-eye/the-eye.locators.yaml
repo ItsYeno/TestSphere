@@ -1,0 +1,18 @@
+# THE EYE (Downloads/THE_EYE_source/the-eye, built to dist/test.html).
+# Navigation buttons are matched by the screen they open.
+nav:
+  overview: button[onclick="nav('home')"]
+  kpis: button[onclick="nav('kpis')"]
+  tasks: button[onclick="nav('tasks')"]
+  settings: button[onclick="nav('admin')"]
+
+tasks:
+  search: input[placeholder="Search tasks"]
+
+kpis:
+  search: input[placeholder="Search KPIs or units"]
+
+importData:
+  tab: button[onclick="S.adminTab='import';render(false)"]
+  paste: "#impTxt"
+  confirm: button[onclick="impCommit()"]

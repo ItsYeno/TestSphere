@@ -26,8 +26,9 @@ yarn-error.log*
 *.db
 *.sqlite
 
-# Storage uploads (can be git-ignored as we'll use cloud storage in production)
-storage/uploads/
+# TestSphere v1: dashboard uploads, and old test outputs kept for reference
+legacy/storage/uploads/
+legacy/test-outputs/
 
 # IDE
 .vscode/
@@ -38,3 +39,5 @@ storage/uploads/
 # OS
 .DS_Store
 Thumbs.db
+# TestSphere runs (reports, screenshots, videos, history)
+runs/

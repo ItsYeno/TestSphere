@@ -1,0 +1,20 @@
+{
+  "name": "testsphere",
+  "version": "2.0.0",
+  "description": "Assurance testing for the apps and AI agents an organization deploys: web, Android, iOS and BuildAI knowledge agents, described as YAML flows, with visual reports and a pass/fail history.",
+  "type": "module",
+  "bin": {
+    "testsphere": "bin/testsphere.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test \"test/*.test.js\"",
+    "validate:examples": "node bin/testsphere.js validate examples --config examples/testsphere.config.yaml"
+  },
+  "dependencies": {
+    "webdriverio": "^9.20.1",
+    "yaml": "^2.8.1"
+  }
+}

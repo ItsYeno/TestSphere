@@ -1,0 +1,26 @@
+name: HSE agent · golden questions
+description: Safety-critical questions the HSE agent must answer from approved HSE procedures.
+target: hse
+tags: [agents, hse, pre-deployment]
+
+cases:
+  - name: Permit to work
+    ask: Can maintenance work start without a permit to work?
+    expect:
+      mentions: [permit to work]
+      cites: [Permit to Work]
+      grounded: true
+
+  - name: Before hot work on a pump
+    ask: What must be in place before hot work can start on a pump?
+    expect:
+      mentions: [permit to work, gas test]
+      cites: [Permit to Work, Gas Testing]
+      grounded: true
+
+  - name: Gas test interval during hot work
+    ask: How often must gas testing be repeated during hot work?
+    expect:
+      mentions: [every 2 hours]
+      cites: [Gas Testing]
+      grounded: true

@@ -1,0 +1,12 @@
+name: BuildAI web · wrong password is refused
+target: buildai-web
+tags: [web, buildai, security]
+locators: ./buildai.locators.yaml
+
+steps:
+  - open: /login
+  - type: { into: signIn.email, text: nobody@testsphere.local }
+  - type: { into: signIn.password, text: definitely-wrong-password }
+  - tap: signIn.submit
+  - expect: { visible: { text: Incorrect email or password } }
+  - expect: { hidden: nav.knowledgeBases }

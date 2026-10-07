@@ -1,0 +1,13 @@
+name: THE EYE · NNPC workspace shows its illustrative-data notice
+description: >
+  The NNPC demo workspace uses public structure with illustrative figures. The
+  notice saying so must be on the overview every time it opens.
+target: the-eye
+tags: [the-eye, governance, smoke]
+locators: ./the-eye.locators.yaml
+
+steps:
+  - open: /test.html#demo-nnpc
+  - expect: { visible: { textContains: Illustrative data for discussion } }
+  - expect: { visible: { text: KPIs on track } }
+  - expect: { visible: { text: Overdue tasks } }

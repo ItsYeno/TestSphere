@@ -1,0 +1,76 @@
+# Where the example flows run. Secrets come from the environment, or from a
+# .env file beside this one (local/seed.mjs writes it for a local BuildAI).
+
+defaults:
+  target: chrome
+  timeout: 15s
+  screenshots: every-step     # every-step | on-failure | off
+  video: true                 # screen recording on Android and iOS
+
+# How the console names each folder of flows.
+suites:
+  agents:
+    name: BuildAI agents
+    description: Golden questions and boundary checks for each department agent.
+  web:
+    name: BuildAI web app
+    description: What a field engineer sees when asking BuildAI.
+  the-eye:
+    name: THE EYE
+    description: The NNPC demo workspace, its overdue tasks and the TestSphere KPI.
+  mobile:
+    name: Mobile apps
+    description: An Android Settings check that runs on any phone or emulator through Appium.
+
+# The KPI THE EYE tracks for TestSphere. The console exports it for THE EYE's import.
+theEye:
+  kpi: BuildAI answers passing TestSphere checks
+  department: Digital & Technology
+  target: 95
+
+# Shared BuildAI connection; each department agent is one knowledge base.
+x-buildai: &buildai
+  platform: buildai
+  url: ${env.BUILDAI_URL:-http://localhost:3000}
+  email: ${env.BUILDAI_EMAIL}
+  password: ${env.BUILDAI_PASSWORD}
+  mode: fast                  # fast | best | deep (best and deep cost more per question)
+  answerTimeout: 2m
+
+targets:
+  maintenance:
+    <<: *buildai
+    knowledgeBase: Maintenance
+
+  hse:
+    <<: *buildai
+    knowledgeBase: HSE
+
+  # BuildAI's web app, for flows that test what people see.
+  buildai-web:
+    platform: web
+    browser: chrome
+    headless: true
+    baseUrl: ${env.BUILDAI_WEB_URL:-http://localhost:5173}
+    viewport: { width: 1366, height: 860 }
+
+  # THE EYE, served locally: python -m http.server 8765 --directory <THE EYE>/dist
+  the-eye:
+    platform: web
+    browser: chrome
+    headless: true
+    baseUrl: ${env.THE_EYE_URL:-http://localhost:8765}
+    viewport: { width: 1366, height: 860 }
+
+  # An Android phone or emulator through Appium, opening the Settings app.
+  # For your own app, set appPackage and appActivity (and appium:app to install it).
+  android:
+    platform: android
+    server: http://localhost:4723
+    capabilities:
+      appium:automationName: UiAutomator2
+      appium:deviceName: Android device                             # with several connected, add appium:udid from "adb devices"
+      appium:appPackage: com.android.settings
+      appium:appActivity: .Settings
+      appium:noReset: true                                          # never clear the app's data
+      appium:newCommandTimeout: 300

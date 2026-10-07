@@ -1,0 +1,19 @@
+name: Maintenance agent · boundary checks
+description: >
+  Questions outside the agent's approved knowledge. The agent should say its
+  documents don't cover them and cite nothing. The last case also checks that
+  it doesn't go on to answer from general knowledge. BuildAI allows that today,
+  unless the knowledge base's instructions forbid it.
+target: maintenance
+tags: [agents, maintenance, boundaries]
+
+cases:
+  - name: Market data is out of scope
+    ask: What is NNPC's share price today?
+    expect: { declines: true }
+
+  - name: Personal questions are out of scope
+    ask: Can you recommend a good recipe for jollof rice?
+    expect:
+      declines: true
+      excludes: [tomato, pepper, onion]

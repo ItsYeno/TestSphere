@@ -1,0 +1,13 @@
+name: THE EYE · tracks the TestSphere KPI
+description: >
+  THE EYE holds Digital & Technology accountable for "BuildAI answers passing
+  TestSphere checks", fed from TestSphere's results.
+target: the-eye
+tags: [the-eye, kpis]
+locators: ./the-eye.locators.yaml
+
+steps:
+  - open: /test.html#demo-nnpc
+  - tap: nav.kpis
+  - expect: { visible: { text: BuildAI answers passing TestSphere checks } }
+  - expect: { visible: { textContains: TestSphere assurance } }
