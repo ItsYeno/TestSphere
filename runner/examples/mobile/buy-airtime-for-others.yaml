@@ -1,0 +1,20 @@
+# The original buyAirtime.js (about 120 lines of WebdriverIO) as a flow. It uses
+# the existing myMTN locator map unchanged. It needs Appium and the phone
+# configured in the "android" target.
+name: myMTN · buy airtime for another number
+target: android
+tags: [mobile, android, legacy-mtn]
+locators: ./mymtn.locators.json
+vars:
+  recipient: 08032001111
+
+steps:
+  - tap: HomePage.defaultSwipeRight.buyAirtime
+  - tap: buyAirtimePage.forOthers
+  - type: { into: buyAirtimePage.forOthers.newNumber.phoneNumber, text: "${recipient}" }
+  - hideKeyboard
+  - tap: buyAirtimePage.forOthers.newNumber.proceed
+  # The original script stopped here without checking the next screen. Add an
+  # expect on that screen (for example the amount field) once its locator is
+  # in mymtn.locators.json.
+  - screenshot: after proceed

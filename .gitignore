@@ -38,3 +38,5 @@ storage/uploads/
 # OS
 .DS_Store
 Thumbs.db
+# TestSphere runs (reports, screenshots, videos, history)
+runs/

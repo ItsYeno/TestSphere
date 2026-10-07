@@ -1,0 +1,11 @@
+name: Sign in to BuildAI
+locators: ./buildai.locators.yaml
+vars:
+  email: ${env.BUILDAI_EMAIL}
+  password: ${env.BUILDAI_PASSWORD}
+steps:
+  - open: /login
+  - type: { into: signIn.email, text: "${email}" }
+  - type: { into: signIn.password, text: "${password}" }
+  - tap: signIn.submit
+  - expect: { visible: nav.knowledgeBases }

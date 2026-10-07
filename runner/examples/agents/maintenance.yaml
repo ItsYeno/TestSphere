@@ -1,0 +1,29 @@
+name: Maintenance agent · golden questions
+description: >
+  Questions with known answers from approved maintenance procedures. Each must
+  be answered with the right facts and cite the procedure it came from.
+target: maintenance
+tags: [agents, maintenance, pre-deployment]
+
+cases:
+  - name: Vibration alarm limit
+    ask: What is the vibration alarm limit for centrifugal pumps?
+    expect:
+      mentions: ["7 mm/s"]
+      cites: [Pump Vibration Monitoring]
+      grounded: true
+      latencyUnder: 60s
+
+  - name: Vibration trip limit
+    ask: At what vibration level must a centrifugal pump be tripped?
+    expect:
+      mentions: ["11 mm/s"]
+      cites: [Pump Vibration Monitoring]
+      grounded: true
+
+  - name: Isolation before work
+    ask: How do I isolate a pump before maintenance work?
+    expect:
+      mentionsAny: [lock-out, lockout, lock and tag]
+      cites: [Pump Isolation]
+      grounded: true

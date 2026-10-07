@@ -1,0 +1,20 @@
+# BuildAI web app (BuildAI/web/src). Prefer attributes people-facing code
+# already relies on (input types, aria-labels) over styling classes.
+signIn:
+  email: input[type=email]
+  password: input[type=password]
+  submit: button[type=submit]
+
+nav:
+  knowledgeBases: nav[aria-label="Knowledge bases"]
+  maintenance: nav[aria-label="Knowledge bases"] a[href="/w/maintenance"]
+
+chat:
+  question: textarea[aria-label="Your question"]
+  send: button[aria-label="Send"]
+  writing: "[aria-label=Writing]"
+  goodAnswer: button[aria-label="Good answer"]
+  firstCitation: "[aria-label^='Source 1']"
+
+sources:
+  panel: aside[aria-label="Sources"]

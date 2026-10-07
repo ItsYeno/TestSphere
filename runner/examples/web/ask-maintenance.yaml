@@ -1,0 +1,19 @@
+name: BuildAI web · ask the Maintenance agent and open the source
+description: >
+  What a field engineer does: sign in, open the Maintenance knowledge base,
+  ask a question, and check the answer's citation opens the source.
+target: buildai-web
+tags: [web, buildai, smoke]
+locators: ./buildai.locators.yaml
+
+steps:
+  - use: ./_sign-in.yaml
+  - tap: nav.maintenance
+  - type: { into: chat.question, text: What is the vibration alarm limit for centrifugal pumps? }
+  - tap: chat.send
+  - name: Answer finishes writing
+    expect: { visible: chat.goodAnswer }
+    timeout: 90s
+  - expect: { visible: chat.firstCitation }
+  - tap: chat.firstCitation
+  - expect: { text: sources.panel, contains: Pump Vibration Monitoring }

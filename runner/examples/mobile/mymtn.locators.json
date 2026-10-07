@@ -1,0 +1,339 @@
+{
+  "GetStartedPage": {
+    "getStartedBtn": "Let's get started"
+  },
+  "SignInOptions": {
+    "phoneSignIn": "Phone Number sign in",
+    "googleSignIn": "Google sign in",
+    "appleSignIn": "Apple sign in",
+    "LogInbtn": "Log In",
+    "biometric": "Sign in with Biometric",
+    "otherChannels": "//android.widget.TextView[@text='Sign in via other channels']",
+    "PhoneLoginPage": {
+      "phoneNumberField": "login_input",
+      "OTPPage": {
+        "field1": "new UiSelector().resourceId(\"otp_input\").instance(0)",
+        "field2": "new UiSelector().resourceId(\"otp_input\").instance(1)",
+        "field3": "new UiSelector().resourceId(\"otp_input\").instance(2)",
+        "field4": "new UiSelector().resourceId(\"otp_input\").instance(3)",
+        "field5": "new UiSelector().resourceId(\"otp_input\").instance(4)",
+        "field6": "new UiSelector().resourceId(\"otp_input\").instance(5)",
+        "changeNumber": "new UiSelector().text(\"Change\")",
+        "resendOTP": "new UiSelector().text(\"Resend OTP\")",
+        "enableBiometricPrompt": "Enable biometric access prompt"
+      }
+    },
+    "TermsAndConditions": "new UiSelector().text(\"Terms & Conditions\")",
+    "PrivacyPolicy": "new UiSelector().text(\"Privacy Policy\")",
+    "appleIcon": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[5]/android.view.ViewGroup",
+    "googleIcon": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[6]/android.view.ViewGroup"
+  },
+  "HomePage": {
+   "profileIcon": "//android.view.ViewGroup[@content-desc='M']/android.view.ViewGroup",
+    "ProfileSection": {
+      "home": "new UiSelector().text(\"0\").instance(1)",
+      "accountSummary": {
+    "selector": "new UiSelector().text(\"0\").instance(2)",
+    "switchAccounts": "//android.widget.TextView[@text='Switch Account']",
+    "Data": "//android.view.View[@content-desc='Data']/android.view.ViewGroup",
+    "Airtime": "//android.view.View[@content-desc='Airtime']/android.view.ViewGroup",
+    "otherBalance": "//android.view.View[@content-desc='Other Balance']/android.view.ViewGroup"
+  },
+      "securitySettings": "new UiSelector().text(\"0\").instance(3)",
+      "tariffPlans": "new UiSelector().text(\"0\").instance(4)",
+      "myProfile": "new UiSelector().text(\"0\").instance(5)",
+      "addNewNumber": "new UiSelector().text(\"0\").instance(6)",
+      "roaming": "new UiSelector().text(\"0\").instance(7)",
+      "more": "new UiSelector().text(\"0\").instance(8)",
+      "notification": "//android.view.ViewGroup[@content-desc='0, Notification, 0']/android.view.ViewGroup",
+      "appTour": "//android.view.ViewGroup[@content-desc='0, App Tour']/android.view.ViewGroup",
+      "logOut": "new UiSelector().text(\"Log out\")",
+      "LogOutPrompt": {
+        "yesLogOut": "//android.view.ViewGroup[@content-desc='Yes, Log Out']",
+        "noGoBack": "new UiSelector().text(\"No, Go Back\")"
+      }
+    },
+    "exploreLevel": "new UiSelector().className(\"com.horcrux.svg.PathView\").instance(7)",
+    "viewMomoBalance": "new UiSelector().className(\"com.horcrux.svg.SvgView\").instance(3)",
+    "notificationIcon": "new UiSelector().className(\"com.horcrux.svg.PathView\").instance(1)",
+    "searchIcon": "new UiSelector().className(\"com.horcrux.svg.PathView\").instance(0)",
+    "refreshBalance": "new UiSelector().text(\"Refresh Balance\")",
+    "defaultSwipeRight": {
+      "buyAirtime": "Buy Airtime",
+      "buyData": "Buy Data",
+      "viewDetails": "View details"
+    },
+    "swipeLeft": {
+      "addNumber": "Add Number",
+      "manageNumbers": "Manage Numbers"
+    },
+    "shortcuts": {
+      "mtnFibreX": "MTN FibreX",
+      "roaming": "Roaming",
+      "share": "Share",
+      "borrow": "Borrow",
+      "offers": "Offers"
+    },
+
+     "Marketplace": {
+       "Hot": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup",
+       "MTN": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[2]",
+       "Fun": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup",
+       "Transport": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[3]",
+       "Shop": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[4]",
+       "Travel": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[5]",
+       "Health": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[4]",
+       "Finance": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[3]",
+       "Utilities": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[1]/android.widget.HorizontalScrollView/android.view.ViewGroup/android.view.ViewGroup[4]"
+  },
+    "explore": {
+      "freegame": "//android.view.ViewGroup[@content-desc='Free Game']/android.view.ViewGroup"
+  },
+    "zigi": "//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup/android.widget.ImageView"
+},
+  "Base":{
+    "Home": "Home",
+    "Play": {
+      "selector": "Play",
+      "cookie":{
+        "close": "//android.widget.Image[@text='cookies close']",
+        "accept": "//android.widget.Button[@resource-id='cookiesConsentAll']",
+        "preferences": "//android.widget.TextView[@text='Cookie Preferences']",
+        "privacyPolicy":"//android.widget.TextView[@text='Privacy and Data Protection Policy']"
+      },
+      "Home": "fa-home",
+      "Search": {
+        "selector": "fa-search",
+        "searchBar": "//android.view.View[@resource-id='block-selfservice-content']/android.view.View/android.view.View[2]"
+      },    
+      "myAccount": "fa-list",
+      "more": "fa-bars"
+    },
+        "menu":{
+        "selector": "//android.widget.FrameLayout[@resource-id='android:id/content']/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.FrameLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[4]",
+        "Offers": "(//android.view.ViewGroup[@content-desc='Offers'])[2]",
+        "buyAirtime": "(//android.view.ViewGroup[@content-desc='Buy Airtime'])[2]",
+        "buyData": "(//android.view.ViewGroup[@content-desc='Buy Data'])[2]",
+        "Share": "(//android.view.ViewGroup[@content-desc='Share'])[2]",
+        "Borrow": "(//android.view.ViewGroup[@content-desc='Borrow'])[2]",
+        "manageNumbers": "Manage Numbers",
+        "usageHistory": "Usage History",
+        "TransactionHistory": "Transaction History",
+        "ManageSubscription": "Manage Subscription",
+        "RoamingService": "Roaming Service",
+        "ContactUs": "Contact Us",
+        "FAQs": "FAQs",
+        "DailyNewsPaper": "Daily News Paper"
+    },
+    "Help":{
+      "selector": "Help",
+      "contactUs": "Contact us, Get in touch with us",
+      "feedback": "Feedback, Share your feedback and help us serve you better",
+      "FAQs": "Frequently Asked Questions, Get a quick answers to all your questions.",
+      "mtnFoundation": "MTN Foundation, View projects and activities",
+      "trackComplaint": "Track Complaint, know the status of your complaints"
+    },
+    "More": {
+      "selector": "More",
+      "myAccount":{
+        "selector": "//android.view.View[@content-desc='My Account']/android.view.ViewGroup",
+        "usageHistory": "Usage History, Check your device usages",
+        "transactionHistory": "Transaction History, See your transaction details",
+        "biometricAcess": {
+            "selector":"Biometric Access, Log in with finger/face recognition ",
+            "enable": "//android.widget.Switch[@text='OFF']",
+            "disable": "//android.widget.Switch[@text='ON']"
+        },
+        "payBill": "Pay Bill, Manage for post paid bills",
+        "securitySettings": "Security Settings, Secure your account and transactions.",
+        "manageNumbers": "Manage Numbers, Add or remove your 'Added' MTN numbers",
+        "manageSubscriptions": "Manage Subscriptions, Check auto renew status",
+        "eSIM": "eSIM, View and download your MTN eSIM profile",
+        "paymentHistory": "Payment History, View the status of your payment",
+        "deviceDataUsage": "Device Data Usage",
+        "5GCoverage": "5G Coverage Locator",
+        "speedTest": "Speed Test",
+        "appTour": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]",
+        "privacyPolicy": "Privacy Policy",
+        "termsConditions": "Terms And Conditions",
+        "logOut": "Log Out"
+        },
+      "shareBorrow": {
+        "selector": "//android.view.View[@content-desc='Share & Borrow']/android.view.ViewGroup",
+        "shareAirtimeData": {
+          "selector": "Share Airtime/Data, Show love to family and friends",
+          "dataAirtime": {
+            "selector": "//android.view.View[@content-desc='Data/Airtime']/android.view.ViewGroup",
+            "shareData": {
+              "selector": "(//android.widget.Button[@content-desc='Share Now'])[1]",
+              "newNumber": {
+        "selector": "//android.widget.TextView[@text='New Number']",
+        "phoneNumber": "//android.widget.EditText",
+        "chooseAmount": "Choose Data Amount"
+      },
+      "addedNumbers": {
+        "selector": "//android.widget.TextView[@text='Added Numbers']",
+        "clickToManage": "//android.widget.TextView[@text='click here']"
+      },
+      "beneficiaries": {
+        "selector": "//android.widget.TextView[@text='Beneficiaries']",
+        "clickToManage": "//android.widget.TextView[@text='click here']"
+      }
+        },
+            "shareAirtime": {
+              "selector": "(//android.widget.Button[@content-desc='Share Now'])[2]",
+              "newNumber": {
+        "selector": "//android.widget.TextView[@text='New Number']",
+        "phoneNumber": "//android.widget.EditText",
+        "chooseAmount": "Choose Airtime Amount"
+      },
+      "addedNumbers": {
+        "selector": "//android.widget.TextView[@text='Added Numbers']",
+        "clickToManage": "//android.widget.TextView[@text='click here']"
+      },
+      "beneficiaries": {
+        "selector": "//android.widget.TextView[@text='Beneficiaries']",
+        "clickToManage": "//android.widget.TextView[@text='click here']"
+          }
+        }}
+        ,
+          "smeDataShare": "//android.view.View[@content-desc='SME DataShare']/android.view.ViewGroup"
+        },
+        "borrowAirtimeData": {
+          "selector": "Borrow Airtime/Data, Never run out of Airtime or Data",
+          "accept": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]",
+          "decline": "//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[3]",
+          "proceed": "Proceed"
+        }
+      },
+      "rewards": {
+        "selector": "//android.view.View[@content-desc='Rewards']/android.view.ViewGroup",
+        "myReferrals": "My Referrals, Check your referral list/status",
+        "prestigeRewards": "Prestige Rewards, Check your prestige rewards",
+        "Offers": "Offers, Enjoy exclusive App benefits",
+        "referEarn": "Refer & Earn, Invite a friend and get FREE data"
+      }
+    }
+  },
+    "buyAirtimePage":{
+        "forSelf": {
+            "selector": "//android.view.View[@content-desc='Buy For Self']/android.view.ViewGroup",
+            "enterAmount": "//android.widget.EditText[@resource-id='input_amount']",
+            "voucherPay": "//android.widget.TextView[@text='Pay With Voucher']",
+            "viewAll": "View all"
+        },
+        "forOthers": {
+      "selector": "//android.view.View[@content-desc='Buy For Others']/android.view.ViewGroup",
+      "newNumber": {
+        "selector": "//android.widget.TextView[@text='New Number']",
+        "phoneNumber": "//android.widget.EditText",
+        "proceed": "Proceed"
+      },
+      "addedNumbers": {
+        "selector": "//android.widget.TextView[@text='Added Numbers']",
+        "clickToManage": "//android.widget.TextView[@text='click here']"
+      },
+      "beneficiaries": {
+        "selector": "//android.widget.TextView[@text='Beneficiaries']",
+        "clickToManage": "//android.widget.TextView[@text='click here']"
+      }
+    }
+  },
+    "buyDataPage":{
+        "forSelf": {
+          "selector": "//android.view.View[@content-desc='']/android.viBuy For Selfew.ViewGroup",
+          "favorites": "Favorites",
+          "categories": {
+            "selector": "Categories",
+            "dataBundles": "Data Bundles",
+            "dataVoiceBundles": "Data & Voice Bundles",
+            "socialBundles": "Social Bundles",
+            "intlCall": "Intl Calling Bundles",
+            "smeBundles": "SME Bundles",
+            "visitorsPlan": "Visitors plan",
+            "thryveBundles": "Thryve Bundles",
+            "digitalBundles": "Digital Bundles",
+            "hynetflexBundles": "Broadband (Hynetflex) Bundles",
+            "mifiBundles": "Broadband (Mifi) Bundles"
+          },
+          "buyAgain": "Buy Again"
+    },
+    "forOthers": {
+      "selector": "//android.view.View[@content-desc='Buy For Others']/android.view.ViewGroup",
+      "newNumber": {
+        "selector": "//android.widget.TextView[@text='New Number']",
+        "phoneNumber": "//android.widget.EditText",
+        "proceed": "Proceed"
+      },
+      "addedNumbers": {
+        "selector": "//android.widget.TextView[@text='Added Numbers']",
+        "clickToManage": "//android.widget.TextView[@text='click here']"
+      },
+      "beneficiaries": {
+        "selector": "//android.widget.TextView[@text='Beneficiaries']",
+        "clickToManage": "//android.widget.TextView[@text='click here']"
+      }
+    }
+  },
+  "viewDetailsPage": {
+    "data": {
+      "selector": "//android.view.View[@content-desc='Data']/android.view.ViewGroup",
+      "BuyData": "Buy Data"
+    },
+    "airtime": {
+      "selector": "//android.view.View[@content-desc='Airtime']/android.view.ViewGroup", 
+      "recharge": "Recharge",
+      "airtimeDetails": "View Airtime Details"
+    },
+    "otherBalance": {
+      "selector": "//android.view.View[@content-desc='Other Balance']/android.view.ViewGroup"
+    }
+  },
+  "fibreXPage": {
+    "menu":{
+      "selector": "toolbar menu",
+      "restart": "Restart",
+      "settings": "Settings",
+      "cancel": "//android.widget.Button[@resource-id='ng.mtn.nextgen:id/toolbar_menu_cancel']"
+    },
+    "close": "close mini program",
+   "products":{
+    "customerQue": {
+    "yes": "//android.widget.RadioButton[contains(@text, 'Yes')]",
+    "no": "//android.widget.RadioButton[contains(@text, \"I'm New\")]"
+  },
+    "numOrID": "//android.widget.EditText[@resource-id='fnNumber']",
+    "proceed": "//android.widget.Button[@text='Proceed']"
+  },
+  "purchaseHistory": "//android.view.View[@resource-id='Store_FibrePlan_Widget']/android.view.View[3]/android.widget.Image[2]",
+  "getHelp": {
+  "selector": "//android.view.View[@resource-id=\"Store_FibreHistory_Widget\"]/android.view.View/android.view.View[2]/android.widget.Image[3]",
+    "helpHelp": {
+      "selector": "//android.view.View[@resource-id='Store_FibreHelp_Widget']/android.view.View[2]/android.view.View[1]",
+      "callNo": "//android.widget.Button[contains(@text, 'Call')]",
+      "name": "//android.view.View[@resource-id='Store_FibreGethelp_Widget']/android.view.View[2]/android.view.View/android.view.View[1]/android.widget.EditText",
+      "email": "//android.view.View[@resource-id='Store_FibreGethelp_Widget']/android.view.View[2]/android.view.View/android.view.View[2]/android.widget.EditText",
+      "fnNumber": "//android.view.View[@resource-id='Store_FibreGethelp_Widget']/android.view.View[2]/android.view.View/android.view.View[3]/android.widget.EditText",
+      "messageBox": "//android.view.View[@resource-id='Store_FibreGethelp_Widget']/android.view.View[2]/android.view.View/android.view.View[4]/android.widget.EditText",
+      "submit": "//android.widget.Button[@text='Send message']"
+    },
+    "feedback": {
+      "selector": "//android.view.View[@resource-id='Store_FibreHelp_Widget']/android.view.View[2]/android.view.View[2]",
+      "stars": {
+          "one": "(//android.widget.RadioButton[contains(@text, '')])[1]",
+          "two": "(//android.widget.RadioButton[contains(@text, '')])[2]",
+          "three": "(//android.widget.RadioButton[contains(@text, '')])[3]",
+          "four": "(//android.widget.RadioButton[contains(@text, '')])[4]",
+          "five": "(//android.widget.RadioButton[contains(@text, '')])[5]"
+      },
+      "feedbackTextBox": "//android.widget.EditText",
+      "submit": "//android.widget.Button[@text=' submit']"
+    }
+  },
+  "trackOrder": {
+    "selector": "//android.widget.Button[@text='Track FibreX Order']",
+    "piNumber": "//android.widget.EditText[@resource-id='piNumber']",
+    "proceed": "//android.widget.Button[@text='Proceed']"
+  }
+  } 
+  }

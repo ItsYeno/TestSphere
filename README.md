@@ -1,30 +1,34 @@
-# TestSphere - Enterprise Testing Dashboard
+# TestSphere
 
-A comprehensive testing dashboard for MTN organization with support for mobile, web, and API testing teams.
+**Assurance testing for the apps and AI agents an organization deploys.**
 
-## Features
+TestSphere is the trust layer of the platform:
 
-- 🏢 **Team-based Organization** - Mobile, Web, and API teams
-- 📊 **Test Results Dashboard** - Real-time test execution insights
-- 🖼️ **Screenshot & Video Capture** - Automatic failure media capture
-- 🔧 **Multi-framework Support** - Playwright, Selenium, Cypress, Appium, Postman
-- 👥 **Role-based Access** - Admin, Tester, and Viewer roles
-- 🎨 **Professional UI** - MTN-branded interface
-- 📱 **Responsive Design** - Works on all devices
-- 🔄 **CLI Integration** - Upload results from any test framework
+- **THE EYE** sees what is happening on the asset.
+- **BuildAI** knows what the approved procedures say to do about it.
+- **TestSphere** proves the apps and agents give the right, safe answer, before go-live and on every scheduled run after it.
 
-## Quick Start
+You describe what should happen in plain YAML: a journey through a web or mobile app, or a set of questions a department agent must answer from its approved documents. TestSphere runs it in Chrome, Edge or Firefox, on Android or iOS through Appium, or against a BuildAI knowledge base. Every run gives a visual report, a JUnit file for CI, and a pass/fail history, so trust is measured rather than assumed.
 
-```bash
-# Clone and setup
-git clone <repository> testsphere-dashboard
-cd testsphere-dashboard
+```yaml
+name: Maintenance agent · golden questions
+target: maintenance
+cases:
+  - ask: What is the vibration alarm limit for centrifugal pumps?
+    expect:
+      mentions: ["7 mm/s"]
+      cites: [Pump Vibration Monitoring]
+      grounded: true
+  - ask: What is the share price today?
+    expect: { declines: true }
+```
 
-# Install all dependencies
-npm run install:all
+**Start here: [`runner/README.md`](runner/README.md)**
 
-# Initialize database
-npm run database:init
+## What's in this repository
 
-# Start development servers
-npm run dev
+| Folder | What it is |
+|---|---|
+| [`runner/`](runner) | **TestSphere 2.** The test engine and CLI: flows, targets, the BuildAI connector, reports and examples. |
+| `backend/`, `frontend/`, `testsphere-cli/` | TestSphere 1: the results dashboard and upload CLI built for MTN's app teams. Unchanged. The runner's `result.json` is the format a future dashboard will read. |
+| `buyAirtime.js`, `testsphere-reporter*.js`, `mymtn.json` | The original hand-written myMTN test and reporter. [`runner/examples/mobile/buy-airtime-for-others.yaml`](runner/examples/mobile/buy-airtime-for-others.yaml) is the same test as a flow. |

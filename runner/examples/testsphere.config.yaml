@@ -1,0 +1,47 @@
+# Where the example flows run. Secrets come from the environment, or from a
+# .env file beside this one (local/seed.mjs writes it for a local BuildAI).
+
+defaults:
+  target: chrome
+  timeout: 15s
+  screenshots: every-step     # every-step | on-failure | off
+  video: true                 # screen recording on Android and iOS
+
+# Shared BuildAI connection; each department agent is one knowledge base.
+x-buildai: &buildai
+  platform: buildai
+  url: ${env.BUILDAI_URL:-http://localhost:3000}
+  email: ${env.BUILDAI_EMAIL}
+  password: ${env.BUILDAI_PASSWORD}
+  mode: fast                  # fast | best | deep (best and deep cost more per question)
+  answerTimeout: 2m
+
+targets:
+  maintenance:
+    <<: *buildai
+    knowledgeBase: Maintenance
+
+  hse:
+    <<: *buildai
+    knowledgeBase: HSE
+
+  # BuildAI's web app, for flows that test what people see.
+  buildai-web:
+    platform: web
+    browser: chrome
+    headless: true
+    baseUrl: ${env.BUILDAI_WEB_URL:-http://localhost:5173}
+    viewport: { width: 1366, height: 860 }
+
+  # A phone on USB through Appium, as in the original myMTN tests.
+  android:
+    platform: android
+    server: http://localhost:4723
+    capabilities:
+      appium:automationName: UiAutomator2
+      appium:deviceName: 068713718E103200
+      appium:appPackage: ng.mtn.nextgen
+      appium:appActivity: ng.mtn.nextgen.MainActivity
+      appium:autoGrantPermissions: true
+      appium:noReset: true
+      appium:newCommandTimeout: 600
