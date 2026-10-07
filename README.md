@@ -23,12 +23,13 @@ cases:
     expect: { declines: true }
 ```
 
+To see it, open the console: `node runner/bin/testsphere.js console runner/examples`.
+
 **Start here: [`runner/README.md`](runner/README.md)**
 
 ## What's in this repository
 
 | Folder | What it is |
 |---|---|
-| [`runner/`](runner) | **TestSphere 2.** The test engine and CLI: flows, targets, the BuildAI connector, reports and examples. |
-| `backend/`, `frontend/`, `testsphere-cli/` | TestSphere 1: the results dashboard and upload CLI built for MTN's app teams. Unchanged. The runner's `result.json` is the format a future dashboard will read. |
-| `buyAirtime.js`, `testsphere-reporter*.js`, `mymtn.json` | The original hand-written myMTN test and reporter. [`runner/examples/mobile/buy-airtime-for-others.yaml`](runner/examples/mobile/buy-airtime-for-others.yaml) is the same test as a flow. |
+| [`runner/`](runner) | **TestSphere 2.** The engine, the CLI and the TestSphere Console, with the BuildAI connector, reports and example suites for BuildAI and THE EYE. |
+| [`legacy/`](legacy) | **TestSphere 1.** The results dashboard and upload CLI first built for MTN's app teams, kept for reference. |
