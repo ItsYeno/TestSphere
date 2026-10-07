@@ -68,6 +68,10 @@ export function loadConfig(file, { cwd = process.cwd() } = {}) {
     // Targets stay raw until one is used, so a missing ${env.X} for the BuildAI
     // target doesn't stop a web-only run.
     targets: { ...BUILT_IN_TARGETS, ...(raw.targets ?? {}) },
+    // Optional names and descriptions for the console's suites (one per folder of flows).
+    suites: raw.suites ?? {},
+    // The KPI THE EYE tracks for TestSphere: { kpi, department, target }.
+    theEye: raw.theEye ?? null,
   };
 }
 

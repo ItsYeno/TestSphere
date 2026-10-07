@@ -7,6 +7,27 @@ defaults:
   screenshots: every-step     # every-step | on-failure | off
   video: true                 # screen recording on Android and iOS
 
+# How the console names each folder of flows.
+suites:
+  agents:
+    name: BuildAI agents
+    description: Golden questions and boundary checks for each department agent.
+  web:
+    name: BuildAI web app
+    description: What a field engineer sees when asking BuildAI.
+  the-eye:
+    name: THE EYE
+    description: The NNPC demo workspace, its overdue tasks and the TestSphere KPI.
+  mobile:
+    name: Mobile apps
+    description: The myMTN Android journey, on a phone through Appium.
+
+# The KPI THE EYE tracks for TestSphere. The console exports it for THE EYE's import.
+theEye:
+  kpi: BuildAI answers passing TestSphere checks
+  department: Digital & Technology
+  target: 95
+
 # Shared BuildAI connection; each department agent is one knowledge base.
 x-buildai: &buildai
   platform: buildai
@@ -31,6 +52,14 @@ targets:
     browser: chrome
     headless: true
     baseUrl: ${env.BUILDAI_WEB_URL:-http://localhost:5173}
+    viewport: { width: 1366, height: 860 }
+
+  # THE EYE, served locally: python -m http.server 8765 --directory <THE EYE>/dist
+  the-eye:
+    platform: web
+    browser: chrome
+    headless: true
+    baseUrl: ${env.THE_EYE_URL:-http://localhost:8765}
     viewport: { width: 1366, height: 860 }
 
   # A phone on USB through Appium, as in the original myMTN tests.

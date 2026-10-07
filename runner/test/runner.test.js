@@ -78,6 +78,13 @@ test('a failing step skips the rest, captures the screen and page source', async
   assert.match(fs.readFileSync(files.junit, 'utf8'), /<failure message="#submit wasn&#39;t visible after 1\.0s\."/);
 });
 
+test('elements are looked up afresh while waiting, so re-rendered lists still pass', async () => {
+  const { config, load } = setup({ 'f.yaml': 'steps:\n  - expect: { text: "#row", contains: CDU }\n  - tap: "#row"\n' });
+  const driver = fakeDriver({ '#row': { visible: true, text: 'Port Harcourt: restore CDU throughput', rerender: true } });
+  const { run } = await runFlows([load('f.yaml')], { config, open: openWith(driver) });
+  assert.deepEqual(run.flows[0].steps.map((s) => [s.status, s.error]), [['passed', null], ['passed', null]]);
+});
+
 test('an optional step can fail without failing the flow', async () => {
   const { config, load } = setup({ 'f.yaml': 'steps:\n  - tap: "#cookie-banner"\n    optional: true\n  - tap: "#go"\n' });
   const driver = fakeDriver({ '#go': { visible: true } });

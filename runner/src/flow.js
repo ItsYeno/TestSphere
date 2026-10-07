@@ -347,7 +347,7 @@ export function describeStep(step) {
   switch (step.action) {
     case 'open': return `Open ${a.display}`;
     case 'tap': return `Tap ${target}`;
-    case 'type': return `Type "${step.secret ? '••••••' : a.text}" into ${target}`;
+    case 'type': return `Type "${step.secret ? '••••••' : truncate(a.text.trim().replace(/\s*\n\s*/g, ' ⏎ '), 90)}" into ${target}`;
     case 'clear': return `Clear ${target}`;
     case 'select': return `Select "${a.option}" in ${target}`;
     case 'scrollTo': return `Scroll to ${target}`;

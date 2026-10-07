@@ -11,6 +11,13 @@ cases:
       cites: [Permit to Work]
       grounded: true
 
+  - name: Before hot work on a pump
+    ask: What must be in place before hot work can start on a pump?
+    expect:
+      mentions: [permit to work, gas test]
+      cites: [Permit to Work, Gas Testing]
+      grounded: true
+
   - name: Gas test interval during hot work
     ask: How often must gas testing be repeated during hot work?
     expect:

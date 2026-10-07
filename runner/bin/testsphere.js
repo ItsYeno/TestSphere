@@ -12,8 +12,13 @@ const HELP = `TestSphere ${VERSION}: assurance testing for apps and AI agents
 
 Usage
   testsphere run <flows or folders...>    Run flows and write a report
+  testsphere console [folder]             Open the console: run suites and watch them live
   testsphere validate <flows or folders>  Check flows without opening anything
   testsphere init                         Start a test project in this folder
+
+Options for console
+  -p, --port <number>     Port to serve on (default 4600)
+      --no-open           Don't open a browser window
 
 Options for run and validate
   -t, --target <name>     Run against this target instead of each flow's own
@@ -42,8 +47,41 @@ async function main(argv) {
   if (['-v', '--version', 'version'].includes(command)) return print(VERSION, 0);
   if (command === 'run') return run(args);
   if (command === 'validate') return validate(args);
+  if (command === 'console') return openConsole(args);
   if (command === 'init') return init();
   throw new TestSphereError(`Unknown command "${command}". Try: testsphere run flows/`);
+}
+
+async function openConsole(args) {
+  const { values, positionals } = parseArgs({
+    args,
+    allowPositionals: true,
+    options: { config: { type: 'string', short: 'c' }, port: { type: 'string', short: 'p' }, var: { type: 'string', multiple: true }, 'no-open': { type: 'boolean' } },
+  });
+  const project = path.resolve(positionals[0] ?? '.');
+  if (!fs.existsSync(project) || !fs.statSync(project).isDirectory()) throw new TestSphereError(`No such folder: ${positionals[0]}`);
+  const config = loadConfig(values.config ?? findConfig([project]), { cwd: project });
+  loadEnv(config);
+
+  const { createConsole } = await import('../src/console.js');
+  const app = createConsole({ config, project, vars: parseVars(values.var) });
+  const url = await app.listen(Number(values.port ?? 4600));
+  console.log(`${c.bold('TestSphere Console')} is running at ${c.cyan(url)}`);
+  console.log(c.dim(`Suites from ${project}. Press Ctrl+C to stop.`));
+  if (!values['no-open']) openBrowser(url);
+
+  await new Promise((resolve) => process.once('SIGINT', resolve));
+  console.log(c.dim('\nStopping…'));
+  await app.close();
+  return 0;
+}
+
+function openBrowser(url) {
+  const [cmd, args] =
+    process.platform === 'win32' ? ['cmd', ['/c', 'start', '', url]] : process.platform === 'darwin' ? ['open', [url]] : ['xdg-open', [url]];
+  import('node:child_process').then(({ spawn }) => {
+    spawn(cmd, args, { detached: true, stdio: 'ignore' }).on('error', () => {}).unref();
+  });
 }
 
 async function run(args) {
@@ -97,21 +135,12 @@ function prepare(args) {
   }
   if (!positionals.length) throw new TestSphereError('Which flows? For example: testsphere run flows/');
 
-  const vars = {};
-  for (const pair of values.var ?? []) {
-    const at = pair.indexOf('=');
-    if (at < 1) throw new TestSphereError(`--var ${pair} should look like name=value.`);
-    vars[pair.slice(0, at)] = pair.slice(at + 1);
-  }
-
+  const vars = parseVars(values.var);
   const files = discoverFlows(positionals);
   if (!files.length) throw new TestSphereError(`No flows found in ${positionals.join(', ')}.`);
   const configFile = values.config ?? findConfig([path.dirname(files[0]), process.cwd()]);
   const config = loadConfig(configFile);
-  // Secrets for targets (BuildAI passwords, tokens) can live in a .env beside
-  // the config; real environment variables still win.
-  const envFile = path.join(config.dir, '.env');
-  if (fs.existsSync(envFile)) process.loadEnvFile(envFile);
+  loadEnv(config);
 
   const flows = [];
   const errors = [];
@@ -132,6 +161,22 @@ function prepare(args) {
   const selected = tags.length ? flows.filter((f) => f.tags.some((t) => tags.includes(t))) : flows;
   if (!selected.length) throw new TestSphereError(`No flows are tagged ${tags.join(' or ')}.`);
   return { values, flows: selected, config };
+}
+
+function parseVars(pairs = []) {
+  const vars = {};
+  for (const pair of pairs) {
+    const at = pair.indexOf('=');
+    if (at < 1) throw new TestSphereError(`--var ${pair} should look like name=value.`);
+    vars[pair.slice(0, at)] = pair.slice(at + 1);
+  }
+  return vars;
+}
+
+/** Secrets for targets (BuildAI passwords, tokens) can live in a .env beside the config; real environment variables win. */
+function loadEnv(config) {
+  const envFile = path.join(config.dir, '.env');
+  if (fs.existsSync(envFile)) process.loadEnvFile(envFile);
 }
 
 function init() {

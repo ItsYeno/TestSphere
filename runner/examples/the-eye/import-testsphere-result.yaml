@@ -1,0 +1,28 @@
+name: THE EYE · accepts TestSphere's result for its KPI
+description: >
+  The console's "Export for THE EYE" writes one row in THE EYE's KPI actuals
+  format. This pastes such a row into THE EYE's Import data screen and checks
+  the KPI shows the new value. A blank month means the current month.
+target: the-eye
+tags: [the-eye, integration]
+locators: ./the-eye.locators.yaml
+vars:
+  passRate: "100"
+
+steps:
+  - open: /test.html#demo-nnpc
+  - tap: nav.settings
+  - tap: importData.tab
+  - type:
+      into: importData.paste
+      text: |
+        KPI,Month,Actual,Department,Comment
+        BuildAI answers passing TestSphere checks,,${passRate},Digital & Technology,From TestSphere
+  - press: Tab
+  - expect: { visible: { textContains: 1 ready } }
+  - tap: importData.confirm
+  - expect: { visible: { textContains: Imported 1 row } }
+  - tap: nav.kpis
+  - type: { into: kpis.search, text: TestSphere }
+  - expect: { visible: { text: BuildAI answers passing TestSphere checks } }
+  - expect: { visible: { text: "${passRate}.0%" } }

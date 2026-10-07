@@ -3,8 +3,8 @@
 TestSphere proves that what an organization deploys is safe to rely on. That means the **apps people use** (web, Android, iOS) and the **AI agents that answer them** (BuildAI knowledge bases). You describe what should happen in plain YAML. TestSphere runs it before go-live and again on a schedule, and every run leaves a visual report and a pass/fail history.
 
 ```
-THE EYE   sees what is happening on the asset
-BuildAI   knows what the approved procedures say to do about it
+THE EYE     shows how the organisation is performing and who owns each fix
+BuildAI     knows what the approved procedures say to do about it
 TestSphere  proves the apps and agents give the right answer, every time
 ```
 
@@ -16,6 +16,22 @@ TestSphere started as a mobile and web automation tester for the myMTN app. That
 | **Boundary checks** | The agent declines questions outside its approved knowledge and cites nothing | [`examples/agents/boundaries.yaml`](examples/agents/boundaries.yaml) |
 | **Ongoing monitoring** | Scheduled re-runs; every report shows each flow's recent pass rate | `runs/history.jsonl` |
 | **App testing** | What people see in BuildAI's web app, or a mobile app on a real phone | [`examples/web/`](examples/web), [`examples/mobile/`](examples/mobile) |
+| **THE EYE** | Its screens (the illustrative-data notice, overdue tasks, KPIs), and that it accepts TestSphere's pass rate for its KPI | [`examples/the-eye/`](examples/the-eye) |
+
+## The console
+
+```bash
+node bin/testsphere.js console examples
+```
+
+This opens TestSphere in your browser at http://localhost:4600. Each folder of flows is a suite. Press **Run** and every step appears as it happens: the screen TestSphere sees, or the question it asked an agent, the answer and its citations, and the verdict. The console also shows:
+
+- **Where tests run:** each target and whether it's reachable right now (BuildAI, THE EYE, Appium).
+- **Agent answers passing checks:** the pass rate from the latest agent run, against the target set under `theEye:` in the config.
+- **Export for THE EYE:** that pass rate as a CSV in THE EYE's KPI actuals format. In THE EYE, open Workspace settings, then Import data, then KPI actuals.
+- **Recent runs:** every past run, with its full report.
+
+The console runs one suite at a time and listens only on this computer. Name suites and add descriptions under `suites:` in the config. `--port` changes the port and `--no-open` skips opening a browser.
 
 ## Quick start
 
@@ -39,11 +55,13 @@ node bin/testsphere.js run flows/
    ```bash
    BUILDAI_SETUP_CODE=choose-a-long-random-string node examples/local/seed.mjs
    ```
-3. Run the agent and web suites:
+3. Open the console and run the suites from there:
    ```bash
-   node bin/testsphere.js run examples/agents
-   node bin/testsphere.js run examples/web
+   node bin/testsphere.js console examples
    ```
+   Or run them from the terminal: `node bin/testsphere.js run examples/agents examples/web`.
+
+The THE EYE suite needs THE EYE served locally: `python -m http.server 8765 --directory <THE EYE folder>/dist`.
 
 In mock mode BuildAI answers by quoting the passages it retrieved, so these runs exercise TestSphere and BuildAI's search, citations and interface end to end. With a real `ANTHROPIC_API_KEY`, the same suites test the actual answers.
 
@@ -202,5 +220,5 @@ The old flow was: write WebdriverIO by hand, call `startTest/logStep/endTest`, t
 ## Not yet
 
 - **Semantic grading.** Checks are deterministic phrase and citation matches. A grader that compares an answer's meaning to an approved answer would catch paraphrased mistakes.
-- **THE EYE.** Its screens can be tested as web or mobile flows today. A connector that feeds it known readings and checks what it flags needs its API first.
+- **A direct THE EYE feed.** THE EYE takes TestSphere's pass rate by file import today. When THE EYE has a backend, TestSphere can send the result after every run.
 - **Video for web runs**, parallel runs and automatic retries.

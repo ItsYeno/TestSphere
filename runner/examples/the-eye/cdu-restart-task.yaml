@@ -1,0 +1,15 @@
+name: THE EYE · overdue CDU restart task is visible and owned
+description: >
+  The Port Harcourt CDU restart is waiting on a hot work permit. An executive
+  searching tasks must find it, marked overdue, with its owner.
+target: the-eye
+tags: [the-eye, tasks]
+locators: ./the-eye.locators.yaml
+
+steps:
+  - open: /test.html#demo-nnpc
+  - tap: nav.tasks
+  - type: { into: tasks.search, text: CDU }
+  - expect: { visible: { textContains: "Port Harcourt: restore CDU throughput" } }
+  - expect: { visible: { textContains: Overdue } }
+  - expect: { visible: { textContains: Refining capacity utilisation } }

@@ -15,7 +15,16 @@ export function fakeDriver(screen = {}, { platform = 'web' } = {}) {
   const state = { url: 'about:blank', screen };
   const element = (selector) => {
     const get = () => state.screen[selector];
+    // An element reference points at what was on screen when it was looked up.
+    // `rerender: true` replaces the entry once, right after the first lookup,
+    // like a search filter re-rendering a list, so that first reference goes stale.
+    const snapshot = get();
+    if (snapshot?.rerender) state.screen[selector] = { ...snapshot, rerender: false };
     return {
+      async isDisplayed() {
+        const now = get();
+        return Boolean(now?.visible && (now === snapshot || !snapshot?.rerender));
+      },
       async waitForDisplayed({ reverse = false, timeoutMsg } = {}) {
         if (Boolean(get()?.visible) === reverse) throw new Error(timeoutMsg ?? `element ("${selector}") still not displayed`);
         return true;
@@ -23,6 +32,9 @@ export function fakeDriver(screen = {}, { platform = 'web' } = {}) {
       async waitForExist({ timeoutMsg } = {}) {
         if (!get()) throw new Error(timeoutMsg);
         return true;
+      },
+      async isExisting() {
+        return Boolean(get());
       },
       async click() {
         calls.push(['click', selector]);
@@ -55,6 +67,10 @@ export function fakeDriver(screen = {}, { platform = 'web' } = {}) {
     async $(selector) {
       calls.push(['$', selector]);
       return element(selector);
+    },
+    async $$(selector) {
+      calls.push(['$', selector]);
+      return state.screen[selector] ? [element(selector)] : [];
     },
     async url(url) {
       calls.push(['url', url]);

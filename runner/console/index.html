@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TestSphere Console</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%230d6b6b'/%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-5' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="mark" aria-hidden="true"></span>
+    <b>TestSphere</b>
+    <span class="product">Console</span>
+  </div>
+  <div class="project" id="project"></div>
+  <ul class="targets" id="targets" aria-label="Where tests run"></ul>
+</header>
+
+<div class="layout">
+  <aside class="side">
+    <section class="score" id="score" aria-label="Agent answers passing checks"></section>
+
+    <section aria-labelledby="suites-title">
+      <div class="side-h">
+        <h2 id="suites-title">Suites</h2>
+        <button type="button" class="btn small" id="run-all">Run all</button>
+      </div>
+      <div id="suites" class="suites"></div>
+    </section>
+
+    <section aria-labelledby="runs-title">
+      <div class="side-h"><h2 id="runs-title">Recent runs</h2></div>
+      <ol id="runs" class="runs"></ol>
+    </section>
+  </aside>
+
+  <main class="main" id="main" aria-live="polite"></main>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+<script type="module" src="app.js"></script>
+</body>
+</html>

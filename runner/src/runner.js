@@ -21,7 +21,7 @@ export const VERSION = JSON.parse(fs.readFileSync(new URL('../package.json', imp
  *   headed      show the browser
  *   output      runs folder (default: config.defaults.output)
  *   open        session factory (tests pass a fake)
- *   reporter    console callbacks: flowStarted, stepFinished, flowFinished
+ *   reporter    progress callbacks: runStarted, flowStarted, stepStarted, stepFinished, flowFinished
  *   shouldStop  () => true after Ctrl+C: finish the current step, skip the rest
  */
 export async function runFlows(flows, options) {
@@ -47,6 +47,7 @@ export async function runFlows(flows, options) {
     },
     flows: [],
   };
+  reporter.runStarted?.({ id: run.id, runDir, startedAt: run.startedAt, flows });
 
   for (const [index, flow] of flows.entries()) {
     if (shouldStop()) {
@@ -80,6 +81,7 @@ async function runFlow(flow, options) {
   const result = baseResult(flow, options, config);
   const flowDir = path.join(runDir, `${String(index + 1).padStart(2, '0')}-${slugify(flow.name)}`);
   const started = Date.now();
+  result.index = index;
   const finish = () => {
     result.durationMs = Date.now() - started;
     reporter.flowFinished?.(result);
@@ -135,6 +137,7 @@ async function runFlow(flow, options) {
       }
 
       ctx.timeout = step.timeout ?? config.defaults.timeout;
+      reporter.stepStarted?.(record, result);
       const began = Date.now();
       try {
         const output = await handlers[step.action](ctx, step.args);

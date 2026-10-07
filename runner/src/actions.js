@@ -39,11 +39,12 @@ export const handlers = {
 
   async scrollTo(ctx, { locator }) {
     const selector = toSelector(locator.value, ctx.platform);
-    const element = await ctx.driver.$(selector);
     if (ctx.platform === 'web') {
-      await element.waitForExist({ timeout: ctx.timeout, timeoutMsg: notFound(locator, selector, ctx.timeout) });
-      await element.scrollIntoView({ block: 'center' });
+      const ok = await waitFor(ctx, async () => (await ctx.driver.$(selector)).isExisting(), ctx.timeout);
+      if (!ok) throw new CheckFailed(notFound(locator, selector, ctx.timeout));
+      await (await ctx.driver.$(selector)).scrollIntoView({ block: 'center' });
     } else {
+      const element = await ctx.driver.$(selector);
       // On a device WebdriverIO swipes until the element shows up.
       await element.scrollIntoView({ maxScrolls: 10 });
       await element.waitForDisplayed({ timeout: ctx.timeout, timeoutMsg: notFound(locator, selector, ctx.timeout) });
@@ -90,11 +91,38 @@ export const handlers = {
 
 // ------------------------------------------------------------------ screens
 
+/**
+ * Wait for an element to be visible and return it. The element is looked up
+ * again on every poll: pages that re-render (a search filter, a streaming
+ * answer) replace their elements, and an old reference never becomes visible.
+ */
 async function find(ctx, locator, timeout = ctx.timeout) {
   const selector = toSelector(locator.value, ctx.platform);
-  const element = await ctx.driver.$(selector);
-  await element.waitForDisplayed({ timeout, timeoutMsg: notFound(locator, selector, timeout) });
-  return element;
+  let found = null;
+  const ok = await waitFor(ctx, async () => Boolean((found = await firstShown(ctx, selector))), timeout);
+  if (!ok) throw new CheckFailed(notFound(locator, selector, timeout));
+  return found;
+}
+
+/**
+ * The first match that is actually on screen. Text often appears first in
+ * something hidden (a closed dropdown's options, a collapsed menu), so the
+ * first match in the page isn't necessarily the one a person sees.
+ */
+async function firstShown(ctx, selector) {
+  const elements = await ctx.driver.$$(selector);
+  for (const element of [...elements].slice(0, 25)) {
+    if (await shown(element)) return element;
+  }
+  return null;
+}
+
+async function shown(element) {
+  try {
+    return await element.isDisplayed();
+  } catch {
+    return false;
+  }
 }
 
 async function checkScreen(ctx, check, remaining) {
@@ -104,16 +132,20 @@ async function checkScreen(ctx, check, remaining) {
       await find(ctx, check.locator, remaining());
       return;
     case 'hidden': {
-      const element = await ctx.driver.$(toSelector(check.locator.value, ctx.platform));
+      const selector = toSelector(check.locator.value, ctx.platform);
       const timeout = remaining();
-      await element.waitForDisplayed({ reverse: true, timeout, timeoutMsg: `${subject} was still visible after ${formatDuration(timeout)}.` });
+      const ok = await waitFor(ctx, async () => !(await firstShown(ctx, selector)), timeout);
+      if (!ok) throw new CheckFailed(`${subject} was still visible after ${formatDuration(timeout)}.`);
       return;
     }
     case 'text': {
-      const element = await find(ctx, check.locator, remaining());
+      await find(ctx, check.locator, remaining());
+      const selector = toSelector(check.locator.value, ctx.platform);
       let actual = '';
       const ok = await waitFor(ctx, async () => {
-        actual = normalize(await element.getText());
+        const element = await firstShown(ctx, selector);
+        if (!element) return false;
+        actual = normalize(await element.getText().catch(() => actual));
         return check.equals != null ? actual === normalize(check.equals) : actual.includes(normalize(check.contains));
       }, remaining());
       if (!ok) {

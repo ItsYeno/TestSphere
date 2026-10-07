@@ -4,7 +4,7 @@
 
 TestSphere is the trust layer of the platform:
 
-- **THE EYE** sees what is happening on the asset.
+- **THE EYE** shows how the organisation is performing and who owns each fix.
 - **BuildAI** knows what the approved procedures say to do about it.
 - **TestSphere** proves the apps and agents give the right, safe answer, before go-live and on every scheduled run after it.
 
