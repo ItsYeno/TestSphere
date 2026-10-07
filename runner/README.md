@@ -45,7 +45,13 @@ node bin/testsphere.js init                 # in an empty folder: a config and a
 node bin/testsphere.js run flows/
 ```
 
-### Try the examples against a local BuildAI (no API key, no spend)
+### The demo, in one step
+
+Double-click `examples\local\start-demo.cmd`, or run `node examples/local/demo.mjs`. It starts BuildAI in simulation mode, serves THE EYE, loads the sample procedures, starts the console, and opens THE EYE (in a private window), BuildAI and the console in your browser. Keep its window open; Ctrl+C stops everything it started.
+
+The first run writes BuildAI's `.env` (simulation mode, no API key, no spend) and creates the demo account; later runs reuse them. It expects BuildAI beside the TestSphere folder and THE EYE built in `Downloads/THE_EYE_source/the-eye/dist`. Set `BUILDAI_DIR` or `THE_EYE_DIST` in `examples/.env` if yours are elsewhere. If BuildAI's `.env` has `MOCK_LLM=false` and an `ANTHROPIC_API_KEY`, the same demo gives real answers.
+
+### Try the examples against a local BuildAI, step by step (no API key, no spend)
 
 1. Start BuildAI in mock mode from the `BuildAI` folder. `SETUP_TOKEN` is any long random string you choose:
    ```bash

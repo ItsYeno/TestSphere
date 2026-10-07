@@ -58,7 +58,8 @@ async function api(method, route, body) {
   const session = res.headers.getSetCookie().find((c) => c.startsWith('buildai_session='));
   if (session) cookie = session.split(';')[0];
   const data = await res.json().catch(() => ({}));
-  if (!res.ok && res.status !== 202) throw new Error(`${method} ${route}: ${data.error?.message ?? res.status}`);
+  // An upload where every file was already there comes back 400 with the reasons in `rejected`.
+  if (!res.ok && !(isForm && Array.isArray(data.rejected))) throw new Error(`${method} ${route}: ${data.error?.message ?? res.status}`);
   return data;
 }
 
@@ -96,7 +97,8 @@ async function upload(workspaceId, folder) {
   }
   const { accepted = [], rejected = [] } = await api('POST', `/workspaces/${workspaceId}/documents`, form);
   for (const a of accepted) console.log(`  uploaded ${a.filename}`);
-  for (const r of rejected) console.log(`  skipped ${r.filename}: ${r.error}`);
+  if (!accepted.length && rejected.length) console.log(`  ${rejected.length} documents already loaded`);
+  else for (const r of rejected) console.log(`  skipped ${r.filename}: ${r.error}`);
 }
 
 async function waitUntilIndexed(workspaceId, name) {
