@@ -20,7 +20,7 @@ suites:
     description: The NNPC demo workspace, its overdue tasks and the TestSphere KPI.
   mobile:
     name: Mobile apps
-    description: The myMTN Android journey, on a phone through Appium.
+    description: An Android Settings check that runs on any phone or emulator through Appium.
 
 # The KPI THE EYE tracks for TestSphere. The console exports it for THE EYE's import.
 theEye:
@@ -62,15 +62,15 @@ targets:
     baseUrl: ${env.THE_EYE_URL:-http://localhost:8765}
     viewport: { width: 1366, height: 860 }
 
-  # A phone on USB through Appium, as in the original myMTN tests.
+  # An Android phone or emulator through Appium, opening the Settings app.
+  # For your own app, set appPackage and appActivity (and appium:app to install it).
   android:
     platform: android
     server: http://localhost:4723
     capabilities:
       appium:automationName: UiAutomator2
-      appium:deviceName: 068713718E103200
-      appium:appPackage: ng.mtn.nextgen
-      appium:appActivity: ng.mtn.nextgen.MainActivity
-      appium:autoGrantPermissions: true
-      appium:noReset: true
-      appium:newCommandTimeout: 600
+      appium:deviceName: Android device                             # with several connected, add appium:udid from "adb devices"
+      appium:appPackage: com.android.settings
+      appium:appActivity: .Settings
+      appium:noReset: true                                          # never clear the app's data
+      appium:newCommandTimeout: 300

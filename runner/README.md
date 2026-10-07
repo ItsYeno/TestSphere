@@ -149,7 +149,7 @@ Screen checks retry until they pass or the timeout runs out, so you never need f
 
 ## Locators
 
-Name your selectors once in a locator file (YAML or JSON), nested by screen, and refer to them as `screen.element`. Existing locator maps load unchanged. [`examples/mobile/mymtn.locators.json`](examples/mobile/mymtn.locators.json) is the original myMTN file.
+Name your selectors once in a locator file (YAML or JSON), nested by screen, and refer to them as `screen.element`. Existing locator maps load unchanged, including the ones written for the old hand-coded scripts.
 
 - **Web:** CSS (`#email`, `button[type=submit]`) or XPath.
 - **Mobile:** XPath and `new UiSelector()…` are used as written. Any other text is an accessibility id (content-desc), exactly as the old scripts used it. `id=…`, `~…` and `-ios predicate string:…` also work.
@@ -215,7 +215,7 @@ Agent questions cost what BuildAI charges for them: roughly $0.01–0.03 each in
 
 ## Moving from the old reporter
 
-The old flow was: write WebdriverIO by hand, call `startTest/logStep/endTest`, then copy an upload command. Now the flow file is the test. [`examples/mobile/buy-airtime-for-others.yaml`](examples/mobile/buy-airtime-for-others.yaml) is `buyAirtime.js` rewritten. Screenshots, video, page source on failure and the report all come automatically, and the fixed `pause(2000)` waits are gone.
+The old flow was: write WebdriverIO by hand, call `startTest/logStep/endTest`, then copy an upload command. Now the flow file is the test. A 120-line script with fixed `pause(2000)` waits becomes about ten lines of steps, and screenshots, video, page source on failure and the report all come automatically. [`examples/mobile/android-settings.yaml`](examples/mobile/android-settings.yaml) shows a mobile flow; point the `android` target's `appPackage` and `appActivity` at your own app.
 
 ## Not yet
 

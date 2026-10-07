@@ -1,0 +1,20 @@
+# Runs on any Android phone or emulator, with no app to install. Connect the
+# phone (it should show in "adb devices"), start Appium, then run this flow.
+name: Android · find the Android version in Settings
+description: >
+  Opens Settings, finds the About screen and checks it shows the Android
+  version. Phone makers name these screens differently, so the steps match
+  text loosely, and an optional step covers phones that put the version one
+  screen deeper.
+target: android
+tags: [mobile, android, smoke]
+
+steps:
+  - scrollTo: { textContains: About }
+  - tap: { textContains: About }
+  - name: Open Software information (Samsung and similar)
+    tap: { textContains: Software information }
+    optional: true
+    timeout: 3s
+  - scrollTo: { textContains: Android version }
+  - expect: { visible: { textContains: Android version } }
